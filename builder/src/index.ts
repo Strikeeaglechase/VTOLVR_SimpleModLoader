@@ -48,9 +48,12 @@ function build() {
 	const files = fs.readdirSync(`${base}/SMLInstaller/bin/Debug/net5.0`);
 	for (const file of files) {
 		if (file.endsWith(".dev.json") || file.endsWith(".pdb")) continue;
-		const outFileName = file == "SMLInstaller.exe" ? "SimpleModLoaderInstaller.exe" : file;
+		const outFileName = file; // == "SMLInstaller.exe" ? "SimpleModLoaderInstaller.exe" : file;
 		fs.copyFileSync(`${base}/SMLInstaller/bin/Debug/net5.0/${file}`, `${outputPath}/${outFileName}`);
 	}
+
+	// Copy installer batch file
+	fs.copyFileSync(`../install_RUN_ME.bat`, `${outputPath}/install_RUN_ME.bat`);
 
 	console.log(`Build done`);
 }
