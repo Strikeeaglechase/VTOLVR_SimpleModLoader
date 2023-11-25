@@ -1,10 +1,19 @@
-# VTOLVR_SimpleModLoader
+# VTOLVR Simple Mod Loader
 
-A lightweight VTOL VR mod loader that registers itself as an external steam game
+A lightweight VTOL VR mod loader that registers itself as an external steam game. No more constantly reverifying files when switching between modded and unmodded VTOL VR.
+
+### Features
+
+-  Load on start as a primary feature
+-  Separated steam install game
+-  Lightweight, 2MB installer and 8MB after installation
+-  ~~Automatic multiplayer mod sync~~ (WIP)
+-  Live-refresh for mods, no need to restart the game when installing a new mod
+-  Compatible with all existing VTOL VR mods
 
 ## Installation
 
-Simply download the latest release from the [releases page](https://github.com/Strikeeaglechase/VTOLVR_SimpleModLoader/releases) and run the installer. After installing you will need to restart steam, and then will see a "VTOL VR (Modded)" game in your library.
+Simply download the latest release from the [releases page](https://github.com/Strikeeaglechase/VTOLVR_SimpleModLoader/releases) and run the installer. After installing you will need to restart steam, and then will see a "VTOL VR (Modded)" game in your library. If the installer fails to run or instantly closes, you may need to install [.NET 5.0](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-5.0.17-windows-x64-installer) manually.
 
 ## Installing Mods
 
