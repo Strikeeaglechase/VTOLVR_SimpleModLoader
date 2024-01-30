@@ -12,6 +12,8 @@ namespace IMLLoader
         public string pub_id;
         public string version;
 
+        public string load_on_start_scene;
+
         public List<string> dependencies;
         public List<string> mod_dependencies;
     }

@@ -15,6 +15,8 @@ namespace IMLLoader
         private string infoPath;
         public string containingFolder;
         private bool loadOnStart;
+        private string loadOnStartScene = "ReadyRoom";
+
         public ModInfo info;
 
         public bool valid { get; private set; } = false;
@@ -39,6 +41,17 @@ namespace IMLLoader
 
             Logger.Log($"Registering mod from {path}");
             LoadInfoFile();
+
+            if (info == null)
+            {
+                Logger.Log($"Failed to load mod info from {path}");
+                return;
+            }
+
+            if (info.load_on_start_scene != null && info.load_on_start_scene != "")
+            {
+                loadOnStartScene = info.load_on_start_scene;
+            }
         }
 
         public static bool HasFileBeenLoaded(string path) => loadedPaths.Contains(path);
@@ -103,11 +116,16 @@ namespace IMLLoader
             return true;
         }
 
-        public bool LoadIfLoadOnStart()
+        public bool MaybeLoadForScene(string sceneName)
         {
-            if (!valid || !loadOnStart) return false;
+            if (!valid || !loadOnStart || loadOnStartScene != sceneName || isLoaded) return false;
             Logger.Log($"Loading {this} for LOS");
             return Load();
+        }
+
+        private void CheckForUpdates()
+        {
+
         }
 
         private void CheckForDependencies()

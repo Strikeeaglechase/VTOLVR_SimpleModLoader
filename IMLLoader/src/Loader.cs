@@ -107,6 +107,7 @@ namespace IMLLoader
             if (!instance.hasPatched) instance.AddGameStartupPatch();
 
             if (scene.name == "ReadyRoom") instance.DoGameReadyInit();
+            foreach (var mod in instance.mods) mod.MaybeLoadForScene(scene.name);
         }
 
         public void GameStartupAwake(GameStartup gv)
@@ -124,7 +125,6 @@ namespace IMLLoader
         private void DoGameReadyInit()
         {
             uiController.CreateUI();
-            foreach (var mod in mods) mod.LoadIfLoadOnStart();
         }
 
         private void ExtractAnyZippedFolders(string path)

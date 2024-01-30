@@ -165,7 +165,7 @@ namespace VTOLImprovedModLoader
 
         private List<string> GetSteamUserFolders()
         {
-            var users = Directory.GetDirectories(steamPath + "/userdata");
+            var users = Directory.GetDirectories(steamPath);
             return users.Where(userPath => Directory.Exists(userPath + "/config")).ToList();
         }
 
@@ -321,22 +321,29 @@ namespace VTOLImprovedModLoader
 
         private string LocateSteamInstallDirectory()
         {
-            string[] possiblePaths = { "C:/Program Files (x86)/Steam", "C:/Program Files/Steam", "C:/Steam" };
-            foreach (var path in possiblePaths)
+            string[] pathFrags = { "Program Files (x86)/Steam/userdata", "Program Files/Steam/userdata", "Steam/userdata" };
+            var drives = DriveInfo.GetDrives();
+            foreach (var drive in drives)
             {
-                if (Directory.Exists(path)) return path;
+                foreach (var pathFrag in pathFrags)
+                {
+                    var pathToCheck = drive.Name + pathFrag;
+                    if (Directory.Exists(pathToCheck)) return pathToCheck;
+                }
             }
 
-            return PromptForPath("Unable to automatically locate Steam directory. Please manually enter the path:");
+            return PromptForPath("Unable to automatically locate Steam directory. Please manually enter the path:", "userdata");
         }
 
-        private string PromptForPath(string prompt)
+        private string PromptForPath(string prompt, string reqEnd = "")
         {
             Logger.Log(prompt);
             while (true)
             {
                 string path = Console.ReadLine();
                 if (path == null) Logger.Log("No path given..");
+
+                if (reqEnd != "" && !path.EndsWith("reqEnd")) path += "/" + reqEnd;
 
                 if (Directory.Exists(path)) return path;
 
