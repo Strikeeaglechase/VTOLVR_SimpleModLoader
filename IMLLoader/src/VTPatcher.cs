@@ -6,17 +6,22 @@ using System.Runtime.InteropServices;
 using IMLLoader.WinTrust;
 using System.IO;
 using UnityEngine;
+using System.Linq;
 
 namespace IMLLoader
 {
-    class VTPatcher
+    public class VTPatcher
     {
-        private const bool AddGetterSetters = false;
 
         private string gamePath;
-        public VTPatcher(string path)
+        private bool disableVr;
+        private bool addGetterSetters;
+
+        public VTPatcher(string path, bool disableVr, bool addGetterSetters)
         {
             gamePath = path;
+            this.disableVr = disableVr;
+            this.addGetterSetters = addGetterSetters;
         }
 
         public void Start()
@@ -61,7 +66,7 @@ namespace IMLLoader
                 VirtualizeType(type, ref module);
             }
 
-            module.Write("./VTOLVR_Data/Managed/Assembly-CSharp.dll");
+            module.Write("./Assembly-CSharp.dll"); // "./VTOLVR_Data/Managed/Assembly-CSharp.dll"
             module.Dispose();
         }
 
@@ -105,11 +110,19 @@ namespace IMLLoader
 
                 if (type.Name.Equals(nameof(GameVersion)) && method.Name.Equals(nameof(GameVersion.ConstructFromValue)))
                 {
+                    Logger.Log($"Patching GameVersion.ConstructFromValue");
                     PatchGameVersion(method);
+                }
+
+                if (type.Name.Equals(nameof(XRLoaderSelector)) && method.Name.Equals("LoadXR") && disableVr)
+                {
+                    Logger.Log($"Patching XRLoaderSelector.LoadXR");
+                    PatchLoadXR(method);
                 }
 
                 if (type.Name.Equals(nameof(SplashSceneController)) && method.Name.Equals("Start"))
                 {
+                    Logger.Log($"Patching SplashSceneController.Start to disable the old mod loader");
                     RevertModloaderPatch(method);
                 }
             }
@@ -122,7 +135,7 @@ namespace IMLLoader
                     // field.IsPrivate = false;
                     // field.IsPublic = true;
 
-                    if (AddGetterSetters)
+                    if (addGetterSetters)
                     {
                         // Setup setter
                         var md = new MethodDefinition("Get_" + field.Name, MethodAttributes.Public | MethodAttributes.HideBySig, field.FieldType);
@@ -141,7 +154,74 @@ namespace IMLLoader
                         type.Methods.Add(md);
                     }
                 }
+
             }
+
+            // if (addGetterSetters)
+            // {
+            //     foreach (var evt in type.Events)
+            //     {
+            //         // if (evt.Name != "OnDamageLevel") continue;
+            //         Logger.Log($"Patching event {evt.Name}");
+            //         Logger.Log($"Event type: {evt.EventType.Name}");
+            //         var md = new MethodDefinition("Exec_" + evt.Name, MethodAttributes.Public | MethodAttributes.HideBySig, module.TypeSystem.Void);
+            //         var invokeMethod = evt.EventType.Resolve().Methods.Where(m =>
+            //         {
+            //             Logger.Log($"Event method {m.Name}");
+            //             return m.Name == "Invoke";
+            //         }).First();
+            // 
+            //         // Add params based off event type generics
+            //         foreach (var eventParameter in invokeMethod.Parameters)
+            //         {
+            //             Logger.Log($"Event type generic param: {eventParameter.Name}");
+            //             md.Parameters.Add(new ParameterDefinition(eventParameter.ParameterType));
+            //         }
+            // 
+            //         FieldDefinition fd = null;
+            //         foreach (var field in type.Fields)
+            //         {
+            //             if (field.Name == evt.Name) fd = field;
+            //         }
+            // 
+            //         if (fd == null)
+            //         {
+            //             Logger.Log($"Unable to find field for event {evt.Name}");
+            //             return;
+            //         }
+            // 
+            // 
+            //         // Load event onto stack
+            //         Logger.Log($"Adding load onto stack call");
+            //         md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldsfld, fd));
+            //         // Load arguments
+            //         for (int i = 0; i < evt.EventType.GenericParameters.Count; i++)
+            //         {
+            //             md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg, i + 1));
+            //         }
+            // 
+            //         // Call invoke
+            //         Logger.Log($"Adding call to invoke");
+            //         // var method = evt.EventType.
+            //         var importedInvokeMethod = type.Module.ImportReference(invokeMethod);
+            //         Logger.Log($"Imported invoke method: {importedInvokeMethod}");
+            //         md.Body.Instructions.Add(Instruction.Create(OpCodes.Callvirt, importedInvokeMethod));
+            // 
+            //         md.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
+            // 
+            //         // Logger.Log($"Adding import to {invokeMethod.FullName}, via {invokeMethod.DeclaringType}");
+            //         // type.Module.ImportReference(typeof(System.Action<int>.Invoke));
+            //         type.Methods.Add(md);
+            //     }
+            // }
+        }
+
+        private void PatchLoadXR(MethodDefinition method)
+        {
+            var ilp = method.Body.GetILProcessor();
+            var instruction = method.Body.Instructions[0];
+            var newInstruction = Instruction.Create(OpCodes.Ret); // Return on first line
+            ilp.Replace(instruction, newInstruction);
         }
 
         private void PatchGameVersion(MethodDefinition method)

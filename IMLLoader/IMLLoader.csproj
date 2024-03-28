@@ -16,8 +16,8 @@
 		<Reference Include="Assembly-CSharp">
 			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\VTOLVR_Data\Managed\Assembly-CSharp.dll</HintPath>
 		</Reference>
-		<Reference Include="ModLoaderPolyfill">
-		  <HintPath>..\ModLoaderPolyfill\bin\Debug\netstandard2.0\ModLoaderPolyfill.dll</HintPath>
+		<Reference Include="ModLoader">
+		  <HintPath>..\ModLoaderPolyfill\bin\Debug\netstandard2.0\ModLoader.dll</HintPath>
 		</Reference>
 		<Reference Include="Mono.Cecil">
 		  <HintPath>Mono.Cecil.dll</HintPath>
@@ -47,5 +47,9 @@
 		  <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\VTBitConverter.dll</HintPath>
 		</Reference>
 	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\SimpleModLoader\IMLLoader.dll&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;C:\Users\strik\Desktop\Programs\CSharp\SimpleModLoader\SMLInstaller\assets\IMLLoader.dll&quot;&#xD;&#xA;" />
+	</Target>
 
 </Project>

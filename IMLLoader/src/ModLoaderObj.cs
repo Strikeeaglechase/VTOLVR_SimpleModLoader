@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace IMLLoader
 {
-    class ModLoaderObj : MonoBehaviour
+    public class ModLoaderObj : MonoBehaviour
     {
         public static ModLoaderObj instance;
         public AssetBundle assetBundle;
 
-        private InGameUIManager uiManager;
+        public InGameUIManager uiManager;
 
         private void Awake()
         {

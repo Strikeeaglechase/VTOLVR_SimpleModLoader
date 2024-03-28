@@ -93,8 +93,8 @@ namespace VTOLImprovedModLoader
         {
             if (!Directory.Exists(RootAssetsPath))
             {
-                RootAssetsPath = "./root_assets";
-                AssetsPath = "./assets";
+                RootAssetsPath = "./SML/root_assets";
+                AssetsPath = "./SML/assets";
                 Logger.Log($"Switching to non-dev asset paths: {RootAssetsPath}, {AssetsPath}");
             }
         }

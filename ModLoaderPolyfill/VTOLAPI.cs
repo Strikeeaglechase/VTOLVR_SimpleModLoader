@@ -16,6 +16,8 @@ using IMLLoader;
 /// </summary>
 public class VTOLAPI : MonoBehaviour
 {
+    // public static 
+
     public enum ErrorResult { None, NotRegistered, KeyNotFound }
 
     /// <summary>
@@ -79,6 +81,24 @@ public class VTOLAPI : MonoBehaviour
     {
         currentScene = Scene;
         if (SceneLoaded != null) SceneLoaded.Invoke(Scene);
+    }
+
+    /// <summary>
+	/// Creates a settings page in the `mod settings` tab.
+	/// Make sure to fully create your settings before calling this as you 
+	/// can't change it onces it's created.
+	/// </summary>
+	/// <param name="newSettings"></param>
+	public static void CreateSettingsMenu(Setting newSettings)
+    {
+        if (ModLoaderObj.instance == null || ModLoaderObj.instance.uiManager == null)
+        {
+            Debug.LogError("The Mod Loaders Instance is null. We haven't reached the Main Room Scene yet");
+        }
+        else
+        {
+            ModLoaderObj.instance.uiManager.CreateSettingsMenu(newSettings);
+        }
     }
 
     #region Steam Related Methods

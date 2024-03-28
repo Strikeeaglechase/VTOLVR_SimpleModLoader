@@ -32,10 +32,11 @@ namespace IMLLoader
         public List<Mod> mods = new List<Mod>();
 
         public static LoaderSettings settings;
-
         private static bool needsGameExit;
-
         private InGameUIManager uiController;
+
+        private bool isNoVr = false;
+        private bool addGettersSetters = false;
 
 
         public void Start()
@@ -44,6 +45,24 @@ namespace IMLLoader
             {
                 File.WriteAllText(logFileName, "Doorstop has started IMLLoader\n");
                 instance = this;
+
+                var args = Environment.GetCommandLineArgs();
+                foreach (var arg in args)
+                {
+                    if (arg == "-novr")
+                    {
+                        isNoVr = true;
+                        Log($"-novr flag detected, disabling VR");
+                    }
+
+                    if (arg == "-getset")
+                    {
+                        addGettersSetters = true;
+                        Log($"-getset flag detected, patching with getters and setters");
+                    }
+                }
+
+                Log("Args: " + string.Join(", ", args));
 
                 SetupCustomAssemblyResolver();
                 settings = LoaderSettings.Load("./SimpleModLoader/settings.json");
@@ -67,7 +86,7 @@ namespace IMLLoader
 
         private void CreatePatchedDLL()
         {
-            var patcher = new VTPatcher(settings.BaseGamePath);
+            var patcher = new VTPatcher(settings.BaseGamePath, isNoVr, addGettersSetters);
             patcher.Start();
         }
 
@@ -223,7 +242,7 @@ namespace IMLLoader
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
                 var name = new AssemblyName(args.Name);
-                var nameToUse = name.Name == "ModLoader" ? "ModLoaderPolyfill" : name.Name;
+                var nameToUse = name.Name;// == "ModLoader" ? "ModLoaderPolyfill" : name.Name;
 
                 var dllPath = Path.GetFullPath("./SimpleModLoader/" + nameToUse + ".dll");
                 Logger.Log($"Assembly resolve req. Raw: {args.Name}, parsed: {name.Name}, chosen: {nameToUse}. Possible DLL: {dllPath}");
@@ -239,6 +258,16 @@ namespace IMLLoader
 
     public class Logger
     {
-        public static void Log(string message) => Loader.instance.Log(message);
+        public static void Log(string message)
+        {
+            if (Loader.instance != null)
+            {
+                Loader.instance.Log(message);
+            }
+            else
+            {
+                Console.WriteLine("[IML] " + message);
+            }
+        }
     }
 }

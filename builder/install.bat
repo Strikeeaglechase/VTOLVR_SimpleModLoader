@@ -12,4 +12,4 @@ if %errorlevel% neq 0 (
 
 
 
-SMLInstaller.exe
+"SML/SMLInstaller.exe"

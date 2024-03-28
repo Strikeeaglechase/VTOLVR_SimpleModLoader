@@ -63,9 +63,18 @@ namespace IMLLoader
                 var infoFile = File.ReadAllText(infoPath);
                 info = JSONHelper.FromJSON<ModInfo>(infoFile);
 
-                Logger.Log($"Registered mod info for {this}");
-                loadedPaths.Add(infoPath);
-                valid = true;
+                if (info.dll_file == null || info.dll_file == "")
+                {
+                    Logger.Log($"Info file {infoPath} has no dll_file specified");
+                    valid = false;
+                }
+                else
+                {
+                    Logger.Log($"Registered mod info for {this}");
+                    loadedPaths.Add(infoPath);
+                    valid = true;
+                }
+
             }
             catch (Exception e)
             {
@@ -76,7 +85,12 @@ namespace IMLLoader
 
         public bool Load()
         {
-            Logger.Log($"Loading {this}");
+            Logger.Log($"Loading {this}. Already loaded: {isLoaded}");
+
+            if (isLoaded)
+            {
+                return true;
+            }
 
             CheckForDependencies();
 
@@ -89,8 +103,9 @@ namespace IMLLoader
 
             Logger.Log($"Loading DLL at {dllPath}");
 
+            var types = Assembly.Load(File.ReadAllBytes(dllPath)).GetTypes();
             IEnumerable<Type> source =
-                from t in Assembly.Load(File.ReadAllBytes(dllPath)).GetTypes()
+                from t in types
                 where t.IsSubclassOf(typeof(VTOLMOD))
                 select t;
 

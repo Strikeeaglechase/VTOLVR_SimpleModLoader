@@ -10,7 +10,13 @@ const outputPath = `${base}/SimpleModLoaderInstaller`;
 function buildCsProjects() {
 	for (const csprojPath of csprojPaths) {
 		console.log(`Building ${csprojPath}`);
-		execSync("dotnet build", { cwd: path.resolve(csprojPath) });
+		try {
+			execSync("dotnet build", { cwd: path.resolve(csprojPath) });
+		} catch (e) {
+			const stdout: Uint8Array = e.stdout;
+			console.error(stdout.toString());
+			throw e;
+		}
 	}
 }
 
@@ -33,27 +39,28 @@ function build() {
 		fs.rmSync(outputPath, { recursive: true });
 	}
 	fs.mkdirSync(outputPath);
+	fs.mkdirSync(`${outputPath}/SML`);
 
 	buildCsProjects();
 
 	// Copy asset files
-	rcopy(`${base}/SMLInstaller/assets`, `${outputPath}/assets`);
-	rcopy(`${base}/SMLInstaller/root_assets`, `${outputPath}/root_assets`);
+	rcopy(`${base}/SMLInstaller/assets`, `${outputPath}/SML/assets`);
+	rcopy(`${base}/SMLInstaller/root_assets`, `${outputPath}/SML/root_assets`);
 
 	// Copy in subproject DLLs
-	fs.copyFileSync(`${base}/IMLLoader/bin/Debug/netstandard2.0/IMLLoader.dll`, `${outputPath}/IMLLoader.dll`);
-	fs.copyFileSync(`${base}/ModLoaderPolyfill/bin/Debug/netstandard2.0/ModLoaderPolyfill.dll`, `${outputPath}/ModLoaderPolyfill.dll`);
+	fs.copyFileSync(`${base}/IMLLoader/bin/Debug/netstandard2.0/IMLLoader.dll`, `${outputPath}/SML/IMLLoader.dll`);
+	fs.copyFileSync(`${base}/ModLoaderPolyfill/bin/Debug/netstandard2.0/ModLoader.dll`, `${outputPath}/SML/ModLoader.dll`);
 
 	// Copy installer files
 	const files = fs.readdirSync(`${base}/SMLInstaller/bin/Debug/net5.0`);
 	for (const file of files) {
 		if (file.endsWith(".dev.json") || file.endsWith(".pdb")) continue;
 		const outFileName = file; // == "SMLInstaller.exe" ? "SimpleModLoaderInstaller.exe" : file;
-		fs.copyFileSync(`${base}/SMLInstaller/bin/Debug/net5.0/${file}`, `${outputPath}/${outFileName}`);
+		fs.copyFileSync(`${base}/SMLInstaller/bin/Debug/net5.0/${file}`, `${outputPath}/SML/${outFileName}`);
 	}
 
 	// Copy installer batch file
-	fs.copyFileSync(`../install_RUN_ME.bat`, `${outputPath}/install_RUN_ME.bat`);
+	fs.copyFileSync(`../install.bat`, `${outputPath}/install.bat`);
 
 	console.log(`Build done`);
 }

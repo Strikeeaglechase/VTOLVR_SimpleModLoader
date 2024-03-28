@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 
 namespace IMLLoader
 {
-    class InGameUIManager
+    public class InGameUIManager
     {
         private bool hasUiBeenCreated = false;
         private ModLoaderObj modLoaderObj;
