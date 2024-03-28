@@ -66,7 +66,7 @@ namespace IMLLoader
                 VirtualizeType(type, ref module);
             }
 
-            module.Write("./Assembly-CSharp.dll"); // "./VTOLVR_Data/Managed/Assembly-CSharp.dll"
+            module.Write("./VTOLVR_Data/Managed/Assembly-CSharp.dll");
             module.Dispose();
         }
 
