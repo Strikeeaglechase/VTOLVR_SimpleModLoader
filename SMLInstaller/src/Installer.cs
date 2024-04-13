@@ -306,9 +306,11 @@ namespace VTOLImprovedModLoader
             var drives = DriveInfo.GetDrives();
             foreach (var drive in drives)
             {
+                Logger.Log($"Checking drive {drive.Name}");
                 foreach (var pathFrag in pathFrags)
                 {
                     var pathToCheck = drive.Name + pathFrag;
+                    Logger.Log($"Checking {pathToCheck}, exists: {Directory.Exists(pathToCheck)}");
                     if (Directory.Exists(pathToCheck))
                     {
                         return pathToCheck;

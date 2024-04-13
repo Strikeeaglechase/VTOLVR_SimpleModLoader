@@ -13,3 +13,5 @@ if %errorlevel% neq 0 (
 
 
 "SML/SMLInstaller.exe"
+
+pause
