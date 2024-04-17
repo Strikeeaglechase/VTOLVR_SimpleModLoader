@@ -14,42 +14,43 @@
 		  <HintPath>0Harmony.dll</HintPath>
 		</Reference>
 		<Reference Include="Assembly-CSharp">
-			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\VTOLVR_Data\Managed\Assembly-CSharp.dll</HintPath>
+			<HintPath>..\Reference\Assembly-CSharp.dll</HintPath>
 		</Reference>
 		<Reference Include="ModLoader">
-		  <HintPath>..\ModLoaderPolyfill\bin\Debug\netstandard2.0\ModLoader.dll</HintPath>
+		  <HintPath>..\Reference\ModLoader.dll</HintPath>
 		</Reference>
 		<Reference Include="Mono.Cecil">
 		  <HintPath>Mono.Cecil.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine">
-			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.dll</HintPath>
+			<HintPath>..\Reference\UnityEngine.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.AssetBundleModule">
-		  <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+		  <HintPath>..\Reference\UnityEngine.AssetBundleModule.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.CoreModule">
-			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+			<HintPath>..\Reference\UnityEngine.CoreModule.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.CrashReportingModule">
-		  <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.CrashReportingModule.dll</HintPath>
+		  <HintPath>..\Reference\UnityEngine.CrashReportingModule.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.UI">
-		  <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.UI.dll</HintPath>
+		  <HintPath>..\Reference\UnityEngine.UI.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.UIElementsModule">
-		  <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
+		  <HintPath>..\Reference\UnityEngine.UIElementsModule.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.UIModule">
-		  <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+		  <HintPath>..\Reference\UnityEngine.UIModule.dll</HintPath>
 		</Reference>
 		<Reference Include="VTBitConverter">
-		  <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\VTBitConverter.dll</HintPath>
+		  <HintPath>..\Reference\VTBitConverter.dll</HintPath>
 		</Reference>
 	</ItemGroup>
-
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	
+	<!-- Uncomment this and change the paths to something that makes sense for you to auotmate moving the built file. Commented by default because people are not to be trusted with installing games in the right place. -->
+	<!-- <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	  <Exec Command="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\SimpleModLoader\IMLLoader.dll&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;C:\Users\strik\Desktop\Programs\CSharp\SimpleModLoader\SMLInstaller\assets\IMLLoader.dll&quot;&#xD;&#xA;" />
-	</Target>
+	</Target> -->
 
 </Project>

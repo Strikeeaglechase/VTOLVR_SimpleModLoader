@@ -8,10 +8,10 @@
 
 	<ItemGroup>
 		<Reference Include="Assembly-CSharp">
-			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\VTOLVR_Data\Managed\Assembly-CSharp.dll</HintPath>
+			<HintPath>..\Reference\Assembly-CSharp.dll</HintPath>
 		</Reference>
 		<Reference Include="Facepunch.Steamworks.Win64">
-			<HintPath>..\..\..\Typescript\VTOLLiveViewer\HeadlessVTOL\Refrences\Facepunch.Steamworks.Win64.dll</HintPath>
+			<HintPath>..\Reference\Facepunch.Steamworks.Win64.dll</HintPath>
 		</Reference>
 		<Reference Include="IMLLoader">
 			<HintPath>..\IMLLoader\bin\Debug\netstandard2.0\IMLLoader.dll</HintPath>
@@ -22,15 +22,16 @@
 		</Reference>
 		-->
 		<Reference Include="UnityEngine">
-			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.dll</HintPath>
+			<HintPath>..\Reference\UnityEngine.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.CoreModule">
-			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+			<HintPath>..\Reference\UnityEngine.CoreModule.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<!-- Uncomment this and change the paths to something that makes sense for you to auotmate moving the built file. Commented by default because people are not to be trusted with installing games in the right place. -->
+	<!-- <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\SimpleModLoader\ModLoader.dll&quot;" />
-	</Target>
+	</Target> -->
 
 </Project>
