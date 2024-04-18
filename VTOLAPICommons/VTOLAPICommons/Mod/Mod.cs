@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using UnityEngine;
 
-namespace IMLLoader
+namespace VTOLAPICommons
 {
     public class Mod
     {

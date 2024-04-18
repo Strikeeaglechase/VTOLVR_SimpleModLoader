@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace IMLLoader.WinTrust
+namespace VTOLAPICommons.WinTrust
 {
     internal sealed class UnmanagedPointer : IDisposable
     {

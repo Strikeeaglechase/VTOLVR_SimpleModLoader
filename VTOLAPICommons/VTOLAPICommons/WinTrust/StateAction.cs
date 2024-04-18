@@ -1,4 +1,4 @@
-﻿namespace IMLLoader.WinTrust
+﻿namespace VTOLAPICommons.WinTrust
 {
     public enum StateAction
     {

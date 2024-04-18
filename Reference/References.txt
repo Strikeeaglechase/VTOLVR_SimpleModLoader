@@ -1,6 +1,8 @@
 Copy these DLLs from your Managed folder in the VTOL VR install directory and put them in the same directory
 as this text file.
 
+- 0Harmony
+- Mono.Cecil
 - Assembly-CSharp
 - UnityEngine
 - UnityEngine.AssetBundleModule
@@ -10,4 +12,3 @@ as this text file.
 - UnityEngine.UIElementsModule
 - UnityEngine.UIModule
 - VTBitConverter
-- Facepunch.Steamworks.Win64

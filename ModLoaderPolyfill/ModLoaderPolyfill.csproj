@@ -6,26 +6,60 @@
 		<RootNamespace>ModLoader</RootNamespace>
 	</PropertyGroup>
 
+  	<Import Project="..\VTOLAPICommons\VTOLAPICommons\VTOLAPICommons.projitems" Label="Shared" />
+
 	<ItemGroup>
+	  <PackageReference Include="Facepunch.Steamworks" Version="2.0.0" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	<Reference Include="0Harmony">
+		  <HintPath>..\Reference\0Harmony.dll</HintPath>
+		</Reference>
 		<Reference Include="Assembly-CSharp">
 			<HintPath>..\Reference\Assembly-CSharp.dll</HintPath>
 		</Reference>
-		<Reference Include="Facepunch.Steamworks.Win64">
-			<HintPath>..\Reference\Facepunch.Steamworks.Win64.dll</HintPath>
-		</Reference>
+    	<!-- WE SHOULD NOT DEPEND ON IMLLOADER! PLEASE USE THE SHARED PROJECT TITLED "VTOLAPICommons"! -->
+    	<!--
 		<Reference Include="IMLLoader">
 			<HintPath>..\IMLLoader\bin\Debug\netstandard2.0\IMLLoader.dll</HintPath>
 		</Reference>
+		-->
 		<!--
 		<Reference Include="ModLoaderPolyfill">
 			<HintPath>..\IMLLoader\bin\Debug\netstandard2.0\ModLoaderPolyfill.dll</HintPath>
 		</Reference>
 		-->
+		<Reference Include="Mono.Cecil">
+		  <HintPath>..\Reference\Mono.Cecil.dll</HintPath>
+		</Reference>
 		<Reference Include="UnityEngine">
 			<HintPath>..\Reference\UnityEngine.dll</HintPath>
 		</Reference>
+		<Reference Include="UnityEngine.AssetBundleModule">
+		  <HintPath>..\Reference\UnityEngine.AssetBundleModule.dll</HintPath>
+		</Reference>
 		<Reference Include="UnityEngine.CoreModule">
 			<HintPath>..\Reference\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CrashReportingModule">
+		  <HintPath>..\Reference\UnityEngine.CrashReportingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+		  <HintPath>..\Reference\UnityEngine.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIElementsModule">
+		  <HintPath>..\Reference\UnityEngine.UIElementsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIModule">
+		  <HintPath>..\Reference\UnityEngine.UIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>..\Reference\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="VTBitConverter">
+		  <HintPath>..\Reference\VTBitConverter.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 

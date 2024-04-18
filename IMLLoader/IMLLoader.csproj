@@ -5,22 +5,26 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 	</PropertyGroup>
 
+  	<Import Project="..\VTOLAPICommons\VTOLAPICommons\VTOLAPICommons.projitems" Label="Shared" />
+
 	<ItemGroup>
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Facepunch.Steamworks" Version="2.0.0" />
+	  	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Reference Include="0Harmony">
-		  <HintPath>0Harmony.dll</HintPath>
+		  <HintPath>..\Reference\0Harmony.dll</HintPath>
 		</Reference>
 		<Reference Include="Assembly-CSharp">
 			<HintPath>..\Reference\Assembly-CSharp.dll</HintPath>
 		</Reference>
+    	<!-- We still depend on Modloader.dll. Unfortunately this dependency cannot be removed for the shared project, as we want to keep backwards compatibility. -->
 		<Reference Include="ModLoader">
-		  <HintPath>..\Reference\ModLoader.dll</HintPath>
+		  <HintPath>..\ModLoaderPolyfill\bin\Release\netstandard2.0\ModLoader.dll</HintPath>
 		</Reference>
 		<Reference Include="Mono.Cecil">
-		  <HintPath>Mono.Cecil.dll</HintPath>
+		  <HintPath>..\Reference\Mono.Cecil.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine">
 			<HintPath>..\Reference\UnityEngine.dll</HintPath>
