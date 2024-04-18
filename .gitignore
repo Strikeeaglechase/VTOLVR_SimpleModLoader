@@ -5,3 +5,5 @@ dist
 SimpleModLoaderInstaller
 SimpleModLoaderInstaller.zip
 [Rr]eference/*.dll
+![Rr]eference/0Harmony.dll
+![Rr]eference/Mono.Cecil.dll
