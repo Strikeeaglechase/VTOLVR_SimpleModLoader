@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using VTOLAPICommons;
 
-namespace IMLLoader
+namespace VTOLAPICommons
 {
     public class LoaderSettings
     {

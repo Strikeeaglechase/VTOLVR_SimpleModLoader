@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>457a7085-d726-496b-b775-9191743caa4e</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>VTOLAPICommons</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)JSONHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\AllocMethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\RevocationCheckFlags.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\StateAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\TrustProviderFlags.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\UiChoice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\UIContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\UnionChoice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\UnmanagedPointer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\WINTRUST_DATA.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinTrust\WINTRUST_FILE_INFO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\InGameUIManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\Setting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Loader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoaderSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModLoaderObj.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mod\Mod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mod\ModInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VTPatcher.cs" />
+  </ItemGroup>
+</Project>

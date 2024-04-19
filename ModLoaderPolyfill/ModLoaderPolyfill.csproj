@@ -6,31 +6,66 @@
 		<RootNamespace>ModLoader</RootNamespace>
 	</PropertyGroup>
 
+  	<Import Project="..\VTOLAPICommons\VTOLAPICommons\VTOLAPICommons.projitems" Label="Shared" />
+
 	<ItemGroup>
+	  <PackageReference Include="Facepunch.Steamworks" Version="2.0.0" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	<Reference Include="0Harmony">
+		  <HintPath>..\Reference\0Harmony.dll</HintPath>
+		</Reference>
 		<Reference Include="Assembly-CSharp">
-			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\VTOLVR_Data\Managed\Assembly-CSharp.dll</HintPath>
+			<HintPath>..\Reference\Assembly-CSharp.dll</HintPath>
 		</Reference>
-		<Reference Include="Facepunch.Steamworks.Win64">
-			<HintPath>..\..\..\Typescript\VTOLLiveViewer\HeadlessVTOL\Refrences\Facepunch.Steamworks.Win64.dll</HintPath>
-		</Reference>
+    	<!-- WE SHOULD NOT DEPEND ON IMLLOADER! PLEASE USE THE SHARED PROJECT TITLED "VTOLAPICommons"! -->
+    	<!--
 		<Reference Include="IMLLoader">
 			<HintPath>..\IMLLoader\bin\Debug\netstandard2.0\IMLLoader.dll</HintPath>
 		</Reference>
+		-->
 		<!--
 		<Reference Include="ModLoaderPolyfill">
 			<HintPath>..\IMLLoader\bin\Debug\netstandard2.0\ModLoaderPolyfill.dll</HintPath>
 		</Reference>
 		-->
+		<Reference Include="Mono.Cecil">
+		  <HintPath>..\Reference\Mono.Cecil.dll</HintPath>
+		</Reference>
 		<Reference Include="UnityEngine">
-			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.dll</HintPath>
+			<HintPath>..\Reference\UnityEngine.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AssetBundleModule">
+		  <HintPath>..\Reference\UnityEngine.AssetBundleModule.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.CoreModule">
-			<HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VTOL VR\VTOLVR_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+			<HintPath>..\Reference\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CrashReportingModule">
+		  <HintPath>..\Reference\UnityEngine.CrashReportingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+		  <HintPath>..\Reference\UnityEngine.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIElementsModule">
+		  <HintPath>..\Reference\UnityEngine.UIElementsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIModule">
+		  <HintPath>..\Reference\UnityEngine.UIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>..\Reference\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="VTBitConverter">
+		  <HintPath>..\Reference\VTBitConverter.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<!-- Uncomment this and change the paths to something that makes sense for you to auotmate moving the built file. Commented by default because people are not to be trusted with installing games in the right place. -->
+	<!-- <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\SimpleModLoader\ModLoader.dll&quot;" />
-	</Target>
+	</Target> -->
 
 </Project>

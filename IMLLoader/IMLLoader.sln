@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.7.34009.444
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMLLoader", "IMLLoader.csproj", "{C968DEAF-006E-482A-9FEB-7DEB1F0158BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMLLoader", "IMLLoader.csproj", "{C968DEAF-006E-482A-9FEB-7DEB1F0158BD}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\VTOLAPICommons\VTOLAPICommons\VTOLAPICommons.projitems*{c968deaf-006e-482a-9feb-7deb1f0158bd}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

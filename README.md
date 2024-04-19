@@ -11,7 +11,7 @@ A lightweight VTOL VR mod loader that registers itself as an external steam game
 -  Live-refresh for mods, no need to restart the game when installing a new mod
 -  Compatible with all existing VTOL VR mods
 
-![Modded install next to regular install](readme_steam_image.png)
+![Modded install next to regular install](Readme/readme_steam_image.png)
 
 ## Installation
 
@@ -27,3 +27,15 @@ Mods are downloaded from the [Normal VTOL VR Modding Website](https://vtolvr-mod
 If you are having an issue with a mod not working correctly, first check if it works correctly with the regular VTOL VR Mod loader, if the mod works there but not in the SML please report it [In the support server](https://discord.gg/yQ8ZW8cQRt).
 
 If you are having an issue with the mod loader itself, try reinstalling it and restarting steam. If that doesn't work, please report it [In the support server](https://discord.gg/yQ8ZW8cQRt).
+
+## Stuff to put in the Reference folder
+- Assembly-CSharp
+- UnityEngine
+- UnityEngine.AssetBundleModule
+- UnityEngine.CoreModule
+- UnityEngine.CrashReportingModule
+- UnityEngine.UI
+- UnityEngine.UIElementsModule
+- UnityEngine.UIModule
+- VTBitConverter
+- Facepunch.Steamworks.Win64.dll

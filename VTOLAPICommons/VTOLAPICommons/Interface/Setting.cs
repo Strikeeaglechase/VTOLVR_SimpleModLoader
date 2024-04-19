@@ -4,7 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-namespace IMLLoader
+
+namespace VTOLAPICommons
 {
     public class Setting
     {

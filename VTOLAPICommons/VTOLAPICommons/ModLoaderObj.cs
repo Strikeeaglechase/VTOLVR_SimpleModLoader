@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
-using VTOLAPICommons;
-using Logger = VTOLAPICommons.Logger;
 
-namespace IMLLoader
+namespace VTOLAPICommons
 {
     public class ModLoaderObj : MonoBehaviour
     {

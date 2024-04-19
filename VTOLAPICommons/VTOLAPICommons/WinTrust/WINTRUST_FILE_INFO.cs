@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMLLoader.WinTrust
+namespace VTOLAPICommons.WinTrust
 {
     public struct WINTRUST_FILE_INFO : IDisposable
     {

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-namespace IMLLoader
+namespace VTOLAPICommons
 {
     public class InGameUIManager
     {

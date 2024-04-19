@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity;
 using UnityEngine;
-using Doorstop;
+//using Doorstop;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
@@ -16,7 +16,7 @@ using System.IO.Compression;
 using UnityEngine.CrashReportHandler;
 using System.Reflection;
 
-namespace IMLLoader
+namespace VTOLAPICommons
 {
     public class Loader
     {
@@ -125,8 +125,14 @@ namespace IMLLoader
 
             if (!instance.hasPatched) instance.AddGameStartupPatch();
 
-            if (scene.name == "ReadyRoom") instance.DoGameReadyInit();
-            foreach (var mod in instance.mods) mod.MaybeLoadForScene(scene.name);
+            if (scene.name == "ReadyRoom")
+            {
+                instance.DoGameReadyInit();
+            }
+            foreach (var mod in instance.mods)
+            {
+                mod.MaybeLoadForScene(scene.name);
+            }
         }
 
         public void GameStartupAwake(GameStartup gv)

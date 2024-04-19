@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using System.Collections;
 using VTOLVR.Multiplayer;
-using IMLLoader;
+using VTOLAPICommons;
 
 /// <summary>
 /// This is the VTOL VR Modding API which aims to simplify repetitive tasks.
@@ -101,7 +101,7 @@ public class VTOLAPI : MonoBehaviour
         }
     }
 
-    #region Steam Related Methods
+#region Steam Related Methods
 
     /// <summary>
     /// Returns the steam ID of the player which is using this mod.
@@ -126,8 +126,7 @@ public class VTOLAPI : MonoBehaviour
     /// </summary>
     public static string SteamName() => SteamClient.Name;
 
-    #endregion
-
+#endregion
 
     /// <summary>
     /// [MP Supported]

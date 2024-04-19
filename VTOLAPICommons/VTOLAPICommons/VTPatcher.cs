@@ -3,12 +3,11 @@ using Mono.Cecil.Cil;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using VTOLAPICommons.WinTrust;
 using System.IO;
 using System.Linq;
-using VTOLAPICommons;
+using VTOLAPICommons.WinTrust;
 
-namespace IMLLoader
+namespace VTOLAPICommons
 {
     public class VTPatcher
     {
