@@ -10,8 +10,6 @@ if %errorlevel% neq 0 (
 	echo "Dotnet should now be installed"
 )
 
-
-
 "SML/SMLInstaller.exe"
 
 pause
