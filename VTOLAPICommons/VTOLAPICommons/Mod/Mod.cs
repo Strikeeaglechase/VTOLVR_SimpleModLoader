@@ -131,10 +131,10 @@ namespace VTOLAPICommons
             return true;
         }
 
-        public bool MaybeLoadForScene(string sceneName)
+        public bool LoadIfCorrectScene(string sceneName)
         {
             if (!valid || !loadOnStart || loadOnStartScene != sceneName || isLoaded) return false;
-            Logger.Log($"Loading {this} for LOS");
+            Logger.Log($"Loading {this} for Load-On-Start");
             return Load();
         }
 

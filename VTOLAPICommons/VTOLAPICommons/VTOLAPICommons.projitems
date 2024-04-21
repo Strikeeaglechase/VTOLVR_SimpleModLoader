@@ -9,6 +9,9 @@
     <Import_RootNamespace>VTOLAPICommons</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\InGameConsole.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mod\Version.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JSONHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WinTrust\AllocMethod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WinTrust\RevocationCheckFlags.cs" />

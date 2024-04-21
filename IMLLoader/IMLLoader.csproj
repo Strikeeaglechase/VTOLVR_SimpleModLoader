@@ -50,11 +50,19 @@
 		<Reference Include="VTBitConverter">
 		  <HintPath>..\Reference\VTBitConverter.dll</HintPath>
 		</Reference>
+		<Reference Include="UnityEngine.IMGUIModule">
+		  <HintPath>..\Reference\UnityEngine.IMGUIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.InputLegacyModule">
+		  <HintPath>..\Reference\UnityEngine.InputLegacyModule.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 	
 	<!-- Uncomment this and change the paths to something that makes sense for you to auotmate moving the built file. Commented by default because people are not to be trusted with installing games in the right place. -->
-	<!-- <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\SimpleModLoader\IMLLoader.dll&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;C:\Users\strik\Desktop\Programs\CSharp\SimpleModLoader\SMLInstaller\assets\IMLLoader.dll&quot;&#xD;&#xA;" />
-	</Target> -->
+	<!--
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\SimpleModLoader&quot;&#xD;&#xA;" />
+	</Target> 
+  -->
 
 </Project>

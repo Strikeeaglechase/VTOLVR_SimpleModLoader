@@ -5,8 +5,11 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMLLoader", "IMLLoader.csproj", "{C968DEAF-006E-482A-9FEB-7DEB1F0158BD}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VTOLAPICommons", "..\VTOLAPICommons\VTOLAPICommons\VTOLAPICommons.shproj", "{457A7085-D726-496B-B775-9191743CAA4E}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\VTOLAPICommons\VTOLAPICommons\VTOLAPICommons.projitems*{457a7085-d726-496b-b775-9191743caa4e}*SharedItemsImports = 13
 		..\VTOLAPICommons\VTOLAPICommons\VTOLAPICommons.projitems*{c968deaf-006e-482a-9feb-7deb1f0158bd}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

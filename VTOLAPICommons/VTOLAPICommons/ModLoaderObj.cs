@@ -12,7 +12,7 @@ namespace VTOLAPICommons
         public static ModLoaderObj instance;
         public AssetBundle assetBundle;
 
-        public InGameUIManager uiManager;
+        public InGameConsole Console { get; private set; }
 
         private void Awake()
         {
@@ -22,11 +22,15 @@ namespace VTOLAPICommons
                 Destroy(gameObject);
                 return;
             }
+            instance = this;
 
             DontDestroyOnLoad(gameObject);
-
             StartCoroutine(LoadAssetBundle());
             StartCoroutine(LoadModsRoutine());
+
+            var consoleGO = new GameObject("InGameConsole", typeof(InGameConsole));
+            DontDestroyOnLoad(consoleGO);
+            Console = consoleGO.GetComponent<InGameConsole>();
         }
 
         private IEnumerator LoadAssetBundle()
@@ -48,7 +52,6 @@ namespace VTOLAPICommons
                 yield return new WaitForSeconds(1);
             }
         }
-
 
         public GameObject LoadAsset(string name)
         {
