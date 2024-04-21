@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity;
 using UnityEngine;
-//using Doorstop;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
@@ -93,7 +92,10 @@ namespace VTOLAPICommons
         public void Log(string message)
         {
             File.AppendAllText(logFileName, message + "\n");
-            if (gameHasLoaded) Debug.Log($"[IML] {message}");
+            if (gameHasLoaded)
+            {
+                Debug.Log($"[IML] {message}");
+            }
         }
 
         private void AddGameStartupPatch()
@@ -109,7 +111,6 @@ namespace VTOLAPICommons
             {
                 Log($"Unable to patch: {e}");
             }
-
 
             hasPatched = true;
         }
@@ -131,13 +132,12 @@ namespace VTOLAPICommons
             }
             foreach (var mod in instance.mods)
             {
-                mod.MaybeLoadForScene(scene.name);
+                mod.LoadIfCorrectScene(scene.name);
             }
         }
 
         public void GameStartupAwake(GameStartup gv)
         {
-            gameHasLoaded = true;
             Log("Game startup was called, beginning mod loader setup!");
             CrashReportHandler.enableCaptureExceptions = false;
 
@@ -145,6 +145,8 @@ namespace VTOLAPICommons
             var mlObject = new GameObject("SimpleModLoader", typeof(ModLoaderObj));
             var obj = mlObject.GetComponent<ModLoaderObj>();
             uiController = new InGameUIManager(obj);
+
+            gameHasLoaded = true;
         }
 
         private void DoGameReadyInit()
@@ -259,21 +261,6 @@ namespace VTOLAPICommons
 
                 return null;
             };
-        }
-    }
-
-    public class Logger
-    {
-        public static void Log(string message)
-        {
-            if (Loader.instance != null)
-            {
-                Loader.instance.Log(message);
-            }
-            else
-            {
-                Console.WriteLine("[IML] " + message);
-            }
         }
     }
 }

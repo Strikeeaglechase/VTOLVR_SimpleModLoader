@@ -41,7 +41,6 @@ namespace IMLLoader
             Logger.Log("Loaded asset bundle");
         }
 
-
         private IEnumerator LoadModsRoutine()
         {
             while (true)
@@ -50,7 +49,6 @@ namespace IMLLoader
                 yield return new WaitForSeconds(1);
             }
         }
-
 
         public GameObject LoadAsset(string name)
         {

@@ -10,3 +10,5 @@ as this text file.
 - UnityEngine.UIElementsModule
 - UnityEngine.UIModule
 - VTBitConverter
+- UnityEngine.IMGUIModule
+- UnityEngine.InputLegacyModule

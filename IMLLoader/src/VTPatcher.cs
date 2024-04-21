@@ -3,10 +3,10 @@ using Mono.Cecil.Cil;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using VTOLAPICommons.WinTrust;
 using System.IO;
 using System.Linq;
 using VTOLAPICommons;
+using VTOLAPICommons.WinTrust;
 
 namespace IMLLoader
 {
@@ -19,7 +19,7 @@ namespace IMLLoader
 
         public VTPatcher(string path, bool disableVr, bool addGetterSetters)
         {
-            gamePath = path;
+            this.gamePath = path;
             this.disableVr = disableVr;
             this.addGetterSetters = addGetterSetters;
         }
@@ -157,63 +157,64 @@ namespace IMLLoader
 
             }
 
-            // if (addGetterSetters)
-            // {
-            //     foreach (var evt in type.Events)
-            //     {
-            //         // if (evt.Name != "OnDamageLevel") continue;
-            //         Logger.Log($"Patching event {evt.Name}");
-            //         Logger.Log($"Event type: {evt.EventType.Name}");
-            //         var md = new MethodDefinition("Exec_" + evt.Name, MethodAttributes.Public | MethodAttributes.HideBySig, module.TypeSystem.Void);
-            //         var invokeMethod = evt.EventType.Resolve().Methods.Where(m =>
-            //         {
-            //             Logger.Log($"Event method {m.Name}");
-            //             return m.Name == "Invoke";
-            //         }).First();
-            // 
-            //         // Add params based off event type generics
-            //         foreach (var eventParameter in invokeMethod.Parameters)
-            //         {
-            //             Logger.Log($"Event type generic param: {eventParameter.Name}");
-            //             md.Parameters.Add(new ParameterDefinition(eventParameter.ParameterType));
-            //         }
-            // 
-            //         FieldDefinition fd = null;
-            //         foreach (var field in type.Fields)
-            //         {
-            //             if (field.Name == evt.Name) fd = field;
-            //         }
-            // 
-            //         if (fd == null)
-            //         {
-            //             Logger.Log($"Unable to find field for event {evt.Name}");
-            //             return;
-            //         }
-            // 
-            // 
-            //         // Load event onto stack
-            //         Logger.Log($"Adding load onto stack call");
-            //         md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldsfld, fd));
-            //         // Load arguments
-            //         for (int i = 0; i < evt.EventType.GenericParameters.Count; i++)
-            //         {
-            //             md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg, i + 1));
-            //         }
-            // 
-            //         // Call invoke
-            //         Logger.Log($"Adding call to invoke");
-            //         // var method = evt.EventType.
-            //         var importedInvokeMethod = type.Module.ImportReference(invokeMethod);
-            //         Logger.Log($"Imported invoke method: {importedInvokeMethod}");
-            //         md.Body.Instructions.Add(Instruction.Create(OpCodes.Callvirt, importedInvokeMethod));
-            // 
-            //         md.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
-            // 
-            //         // Logger.Log($"Adding import to {invokeMethod.FullName}, via {invokeMethod.DeclaringType}");
-            //         // type.Module.ImportReference(typeof(System.Action<int>.Invoke));
-            //         type.Methods.Add(md);
-            //     }
-            // }
+            // What is this commented code? Can it be removed? - Ierdna
+/*            if (addGetterSetters)
+            {
+                foreach (var evt in type.Events)
+                {
+                    // if (evt.Name != "OnDamageLevel") continue;
+                    Logger.Log($"Patching event {evt.Name}");
+                    Logger.Log($"Event type: {evt.EventType.Name}");
+                    var md = new MethodDefinition("Exec_" + evt.Name, MethodAttributes.Public | MethodAttributes.HideBySig, module.TypeSystem.Void);
+                    var invokeMethod = evt.EventType.Resolve().Methods.Where(m =>
+                    {
+                        Logger.Log($"Event method {m.Name}");
+                        return m.Name == "Invoke";
+                    }).First();
+
+                    // Add params based off event type generics
+                    foreach (var eventParameter in invokeMethod.Parameters)
+                    {
+                        Logger.Log($"Event type generic param: {eventParameter.Name}");
+                        md.Parameters.Add(new ParameterDefinition(eventParameter.ParameterType));
+                    }
+
+                    FieldDefinition fd = null;
+                    foreach (var field in type.Fields)
+                    {
+                        if (field.Name == evt.Name) fd = field;
+                    }
+
+                    if (fd == null)
+                    {
+                        Logger.Log($"Unable to find field for event {evt.Name}");
+                        return;
+                    }
+
+
+                    // Load event onto stack
+                    Logger.Log($"Adding load onto stack call");
+                    md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldsfld, fd));
+                    // Load arguments
+                    for (int i = 0; i < evt.EventType.GenericParameters.Count; i++)
+                    {
+                        md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg, i + 1));
+                    }
+
+                    // Call invoke
+                    Logger.Log($"Adding call to invoke");
+                    // var method = evt.EventType.
+                    var importedInvokeMethod = type.Module.ImportReference(invokeMethod);
+                    Logger.Log($"Imported invoke method: {importedInvokeMethod}");
+                    md.Body.Instructions.Add(Instruction.Create(OpCodes.Callvirt, importedInvokeMethod));
+
+                    md.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
+
+                    // Logger.Log($"Adding import to {invokeMethod.FullName}, via {invokeMethod.DeclaringType}");
+                    // type.Module.ImportReference(typeof(System.Action<int>.Invoke));
+                    type.Methods.Add(md);
+                }
+            }*/
         }
 
         private void PatchLoadXR(MethodDefinition method)
