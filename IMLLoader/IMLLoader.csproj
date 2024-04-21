@@ -59,8 +59,10 @@
 	</ItemGroup>
 	
 	<!-- Uncomment this and change the paths to something that makes sense for you to auotmate moving the built file. Commented by default because people are not to be trusted with installing games in the right place. -->
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<!--
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	  <Exec Command="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\VTOL VR Modded\SimpleModLoader&quot;&#xD;&#xA;" />
 	</Target> 
+  -->
 
 </Project>
