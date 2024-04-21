@@ -82,6 +82,11 @@ namespace VTOLAPICommons
             consoleSliderPosition = GUI.VerticalSlider(new Rect(10, 25, 25, windowBorders), consoleSliderPosition, (numberOfMessages * heightPerLine) - windowBorders, 0);
             int sliderOffset = Mathf.FloorToInt(consoleSliderPosition);
 
+            if (GUI.Button(new Rect(consoleWidth - 100, 25, 75, 20), "Clear"))
+            {
+                _consoleMessage = new string[consoleMessageSize];
+            }
+
             string[] consoleMessages = ConsoleMessages;
             for (int i = 0; i < consoleMessages.Length; i++)
             {
