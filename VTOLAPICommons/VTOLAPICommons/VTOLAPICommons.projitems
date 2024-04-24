@@ -9,6 +9,7 @@
     <Import_RootNamespace>VTOLAPICommons</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\ConsoleMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interface\InGameConsole.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mod\Version.cs" />
