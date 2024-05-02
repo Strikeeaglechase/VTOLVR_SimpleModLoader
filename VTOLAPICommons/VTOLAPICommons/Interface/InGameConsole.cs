@@ -18,13 +18,13 @@ namespace VTOLAPICommons
 
         private const int consoleMessageSize = 500;
 
-        private string[] _consoleMessage;
-        public string[] ConsoleMessages 
+        private ConsoleMessage[] _consoleMessage;
+        public ConsoleMessage[] ConsoleMessages
         { 
             private set => _consoleMessage = value; 
             get
             {
-                var returnArray = new string[numberOfMessages];
+                var returnArray = new ConsoleMessage[numberOfMessages];
 
                 if (numberOfMessages == 0) return returnArray;
 
@@ -54,10 +54,11 @@ namespace VTOLAPICommons
         private int nextConsoleIndex = 0;
 
         private float consoleSliderPosition = 0f;
+        private bool showUnityDebugs = false;
 
         public void Awake()
         {
-            ConsoleMessages = new string[consoleMessageSize];
+            ConsoleMessages = new ConsoleMessage[consoleMessageSize];
             Application.logMessageReceived += HandleUnityDebugLog;
         }
 
@@ -84,24 +85,51 @@ namespace VTOLAPICommons
 
             if (GUI.Button(new Rect(consoleWidth - 100, 25, 75, 20), "Clear"))
             {
-                _consoleMessage = new string[consoleMessageSize];
+                _consoleMessage = new ConsoleMessage[consoleMessageSize];
+                numberOfMessages = 0;
+                nextConsoleIndex = 0;
             }
 
-            string[] consoleMessages = ConsoleMessages;
+            showUnityDebugs = GUI.Toggle(new Rect(consoleWidth - 120, 45, 125, 20), showUnityDebugs, "Show Unity Logs", "toggle");
+
+            ConsoleMessage[] consoleMessages = ConsoleMessages;
+            GUIStyle labelStyle = GUI.skin.GetStyle("label");
             for (int i = 0; i < consoleMessages.Length; i++)
             {
-                GUI.Label(new Rect(35, consoleHeight - 15 - heightPerLine * (i + 1) + sliderOffset, lengthPerLine, heightPerLine), consoleMessages[i]);
+                var messageObj = consoleMessages[i];
+
+                if (messageObj.isUnityLog && !showUnityDebugs) continue;
+
+                switch (messageObj.type)
+                {
+                    case LogType.Assert:
+                    case LogType.Error:
+                    case LogType.Exception:
+                        labelStyle.normal.textColor = Color.red;
+                        break;
+                    case LogType.Log:
+                        labelStyle.normal.textColor = Color.white;
+                        break;
+                    case LogType.Warning:
+                        labelStyle.normal.textColor = Color.yellow;
+                        break;
+                }
+
+                GUI.Label(new Rect(35, consoleHeight - 15 - heightPerLine * (i + 1) + sliderOffset, lengthPerLine, heightPerLine), messageObj.message, labelStyle);
             }
         }
 
         public void HandleUnityDebugLog(string logString, string stackTrace, LogType logType)
         {
-            LogToInGameConsole(logString);
+            // We don't want to delete previous logs from mods if Unity spams a bunch of stuff, so we don't add Unity stuff if we don't show it
+            if (!showUnityDebugs) return;
+
+            LogToInGameConsole(logString, logType, true);
         }
 
-        public void LogToInGameConsole(string message) 
+        public void LogToInGameConsole(string message, LogType type = LogType.Log, bool isUnityLog = false) 
         {
-            _consoleMessage[nextConsoleIndex++] = message;
+            _consoleMessage[nextConsoleIndex++] = new ConsoleMessage(message, type, isUnityLog);
             nextConsoleIndex %= consoleMessageSize;
             numberOfMessages = Math.Min(numberOfMessages + 1, consoleMessageSize);
         }
